@@ -1,18 +1,13 @@
-d:\media\dokumenty\visual studio 2017\Projects\NeuralNetworkTest\NeuralNetworkTest\bin\Debug\csfml-audio-2.dll
-d:\media\dokumenty\visual studio 2017\Projects\NeuralNetworkTest\NeuralNetworkTest\bin\Debug\csfml-graphics-2.dll
-d:\media\dokumenty\visual studio 2017\Projects\NeuralNetworkTest\NeuralNetworkTest\bin\Debug\csfml-system-2.dll
-d:\media\dokumenty\visual studio 2017\Projects\NeuralNetworkTest\NeuralNetworkTest\bin\Debug\csfml-window-2.dll
-d:\media\dokumenty\visual studio 2017\Projects\NeuralNetworkTest\NeuralNetworkTest\bin\Debug\libsndfile-1.dll
-d:\media\dokumenty\visual studio 2017\Projects\NeuralNetworkTest\NeuralNetworkTest\bin\Debug\openal32.dll
-d:\media\dokumenty\visual studio 2017\Projects\NeuralNetworkTest\NeuralNetworkTest\bin\Debug\OpenTK.Compatibility.dll
-d:\media\dokumenty\visual studio 2017\Projects\NeuralNetworkTest\NeuralNetworkTest\bin\Debug\OpenTK.dll
-d:\media\dokumenty\visual studio 2017\Projects\NeuralNetworkTest\NeuralNetworkTest\bin\Debug\NeuralNetworkTest.exe.config
-d:\media\dokumenty\visual studio 2017\Projects\NeuralNetworkTest\NeuralNetworkTest\bin\Debug\NeuralNetworkTest.exe
-d:\media\dokumenty\visual studio 2017\Projects\NeuralNetworkTest\NeuralNetworkTest\bin\Debug\NeuralNetworkTest.pdb
-d:\media\dokumenty\visual studio 2017\Projects\NeuralNetworkTest\NeuralNetworkTest\bin\Debug\sfmlnet-audio-2.dll
-d:\media\dokumenty\visual studio 2017\Projects\NeuralNetworkTest\NeuralNetworkTest\bin\Debug\sfmlnet-graphics-2.dll
-d:\media\dokumenty\visual studio 2017\Projects\NeuralNetworkTest\NeuralNetworkTest\bin\Debug\sfmlnet-system-2.dll
-d:\media\dokumenty\visual studio 2017\Projects\NeuralNetworkTest\NeuralNetworkTest\bin\Debug\sfmlnet-window-2.dll
-d:\media\dokumenty\visual studio 2017\Projects\NeuralNetworkTest\NeuralNetworkTest\obj\Debug\NeuralNetworkTest.csprojResolveAssemblyReference.cache
-d:\media\dokumenty\visual studio 2017\Projects\NeuralNetworkTest\NeuralNetworkTest\obj\Debug\NeuralNetworkTest.exe
-d:\media\dokumenty\visual studio 2017\Projects\NeuralNetworkTest\NeuralNetworkTest\obj\Debug\NeuralNetworkTest.pdb
+C:\Users\arkad\Documents\GitHub\NeuralNetworkTest\bin\Debug\csfml-audio-2.dll
+C:\Users\arkad\Documents\GitHub\NeuralNetworkTest\bin\Debug\csfml-graphics-2.dll
+C:\Users\arkad\Documents\GitHub\NeuralNetworkTest\bin\Debug\csfml-system-2.dll
+C:\Users\arkad\Documents\GitHub\NeuralNetworkTest\bin\Debug\csfml-window-2.dll
+C:\Users\arkad\Documents\GitHub\NeuralNetworkTest\bin\Debug\libsndfile-1.dll
+C:\Users\arkad\Documents\GitHub\NeuralNetworkTest\bin\Debug\openal32.dll
+C:\Users\arkad\Documents\GitHub\NeuralNetworkTest\bin\Debug\OpenTK.Compatibility.dll
+C:\Users\arkad\Documents\GitHub\NeuralNetworkTest\bin\Debug\OpenTK.dll
+C:\Users\arkad\Documents\GitHub\NeuralNetworkTest\bin\Debug\NeuralNetworkTest.exe.config
+C:\Users\arkad\Documents\GitHub\NeuralNetworkTest\bin\Debug\NeuralNetworkTest.exe
+C:\Users\arkad\Documents\GitHub\NeuralNetworkTest\bin\Debug\NeuralNetworkTest.pdb
+C:\Users\arkad\Documents\GitHub\NeuralNetworkTest\obj\Debug\NeuralNetworkTest.exe
+C:\Users\arkad\Documents\GitHub\NeuralNetworkTest\obj\Debug\NeuralNetworkTest.pdb

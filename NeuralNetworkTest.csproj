@@ -54,6 +54,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="classes\Ball.cs" />
+    <Compile Include="classes\Bot.cs" />
+    <Compile Include="classes\Brick.cs" />
+    <Compile Include="classes\Functions.cs" />
+    <Compile Include="classes\Game.cs" />
+    <Compile Include="classes\Line.cs" />
+    <Compile Include="classes\Paddle.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
