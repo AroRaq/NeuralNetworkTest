@@ -11,14 +11,12 @@ namespace NeuralNetworkTest
             hitbox = new CircleShape(10);
             hitbox.Origin = new Vector2f(10f, 10f);
             hitbox.FillColor = Color.Cyan;
-            hitbox.Position = new Vector2f(640, 400);
-            vel = new Vector2f(0, 5);
-            Utility.Normalize(ref vel, MaxSpeed);
+            Restart();
         }
         public void Restart()
         {
             Position = new Vector2f(640, 400);
-            vel = new Vector2f(0, 5);
+            vel = new Vector2f(0.1f, 5f);
             Utility.Normalize(ref vel, MaxSpeed);
 
         }

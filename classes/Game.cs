@@ -10,6 +10,7 @@ namespace NeuralNetworkTest
         {
             FinalScore = 0;
             FrameCount = 0;
+            SinceHit = 0;
             Ball1 = new Ball();
             Paddle1 = new Paddle();
             for (int y = 0; y < 4; y++)
@@ -26,10 +27,12 @@ namespace NeuralNetworkTest
         public Brick[,] Bricks = new Brick[4, 7];
         public Bot bot1;
         public int FrameCount = 0;
+        public int SinceHit = 0;
         public int FinalScore = 0;
         public int BricksLeft = 28;
         public void Restart()
         {
+            SinceHit = 0;
             BricksLeft = 28;
             FinalScore = 0;
             FrameCount = 0;
@@ -52,11 +55,16 @@ namespace NeuralNetworkTest
         public int RunFrame()
         {
             FrameCount++;
+            SinceHit++;
             //if (Keyboard.IsKeyPressed(Keyboard.Key.Left) && Paddle1.hitbox.GetGlobalBounds().Left >= 15)
             //    Paddle1.hitbox.Position -= new Vector2f(15, 0);
             //if (Keyboard.IsKeyPressed(Keyboard.Key.Right) && Paddle1.hitbox.GetGlobalBounds().Left+Paddle1.hitbox.GetGlobalBounds().Width <=1265)
             //    Paddle1.hitbox.Position += new Vector2f(15, 0);
 
+            if (SinceHit > 1200)
+            {
+                GameOver(false);
+            }
             if (FrameCount > 6000)
             {
                 GameOver(false);
@@ -71,6 +79,7 @@ namespace NeuralNetworkTest
                         FloatRect intersection;
                         if (Bricks[y, x].hitbox.GetGlobalBounds().Intersects(Ball1.hitbox.GetGlobalBounds(), out intersection))
                         {
+                            SinceHit = 0;
                             FinalScore++;
                             if (Bricks[y, x].OnHit(Ball1, intersection))
                             {

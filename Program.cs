@@ -47,6 +47,7 @@ namespace NeuralNetworkTest
             Game game1 = new Game();
 
             int BotAmount = 1000;
+            int Generation = 1;
             List<Bot> BotList = new List<Bot>();
             for (int i=0; i<BotAmount; i++)
             {
@@ -73,7 +74,8 @@ namespace NeuralNetworkTest
                     CurrBot++;
                     if (CurrBot==BotAmount)
                     {
-                        System.Console.WriteLine("End of generation");
+                        System.Console.WriteLine("End of generation {0}.", Generation);
+                        Generation++;
                         BotList.Sort((b1, b2) => b1.FinalScore.CompareTo(b2.FinalScore));
                         BotList.Reverse();
                         System.Console.WriteLine("Best Score:   {0};", BotList[0].FinalScore);

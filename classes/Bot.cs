@@ -117,8 +117,8 @@ namespace NeuralNetworkTest
                         temp[n] += Convert.ToDouble(Utility.Magnitude(Bricks[y, x].Position, Paddle1.Position)) * 0.2d * set1[7 * y + x, n];
                     }
                 }
-                temp[n] += set1[28, n] * Convert.ToDouble(Ball1.Position.X - Ball1.Position.X) / 1280f * 10;
-                temp[n] += set1[29, n] * Convert.ToDouble(Ball1.Position.Y - Ball1.Position.Y) / 720f * 10;
+                temp[n] += 10d * set1[28, n] * Convert.ToDouble(Ball1.Position.X - Ball1.Position.X) / 1280d;
+                temp[n] += 10d * set1[29, n] * Convert.ToDouble(Ball1.Position.Y - Ball1.Position.Y) / 720d;
                 temp[n] /= 30;
             }
             double output = 0;
