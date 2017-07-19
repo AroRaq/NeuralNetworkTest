@@ -11,4 +11,3 @@ C:\Users\arkad\Documents\GitHub\NeuralNetworkTest\bin\Debug\NeuralNetworkTest.ex
 C:\Users\arkad\Documents\GitHub\NeuralNetworkTest\bin\Debug\NeuralNetworkTest.pdb
 C:\Users\arkad\Documents\GitHub\NeuralNetworkTest\obj\Debug\NeuralNetworkTest.exe
 C:\Users\arkad\Documents\GitHub\NeuralNetworkTest\obj\Debug\NeuralNetworkTest.pdb
-C:\Users\arkad\Documents\GitHub\NeuralNetworkTest\obj\Debug\NeuralNetworkTest.csprojResolveAssemblyReference.cache

@@ -61,12 +61,21 @@ namespace NeuralNetworkTest
                 for (int j = 0; j < Child.Nodes; j++)
                 {
                     Child.set1[i, j] = (set1[i, j] + other.set1[i, j]) / 2;
+                    //MUTACJA
+                    if (Utility.Chance(0.1d))
+                    {
+                        Child.set1[i, j] *= Utility.RandomDouble(-1, 1);
+                    }
                 }
             }
             Child.set2 = new double[Nodes];
             for (int i = 0; i < Child.Nodes; i++)
             {
                 Child.set2[i] = (set2[i] + other.set2[i]) / 2;
+                if (Utility.Chance(0.05d))
+                {
+                    Child.set2[i] *= Utility.RandomDouble(-1, 1);
+                }
             }
             return Child;
         }

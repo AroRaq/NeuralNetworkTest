@@ -37,5 +37,11 @@ namespace Functions
         {
             return new Color(255, 255, 255, Convert.ToByte(c));
         }
+        public static bool Chance(double c)
+        {
+            if (RandomDouble(0, 1) <= c)
+                return true;
+            return false;
+        }
     }
 }

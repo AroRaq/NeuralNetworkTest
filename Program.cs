@@ -86,7 +86,7 @@ namespace NeuralNetworkTest
                             }
                         }
                         if (BotList.Count > BotAmount / 2)
-                            BotList.RemoveRange(BotAmount / 2, BotAmount);
+                            BotList.RemoveRange(BotAmount / 2, BotList.Count - BotAmount / 2);
                         System.Console.WriteLine("Bots lived:   {0};", BotList.Count);
                         int tmp1 = 0;
                         while (BotList.Count < BotAmount * 3 / 4)
