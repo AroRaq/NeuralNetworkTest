@@ -110,7 +110,6 @@ namespace NeuralNetworkTest
             int f = FinalScore - FrameCount / 180;
             if (bot1.BounceCount == 0)
                 f = 0;
-            System.Console.WriteLine(f);
             Restart();
             return f;
         }

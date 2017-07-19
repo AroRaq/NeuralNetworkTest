@@ -10,6 +10,7 @@ namespace NeuralNetworkTest
     class Program
     {
         static bool FastForward = false;
+        static bool OnlyConsole = false;
         
         static void OnKeyPressed(object sender, KeyEventArgs e)
         {
@@ -24,7 +25,12 @@ namespace NeuralNetworkTest
                 else
                     window.SetFramerateLimit(100000);
                 FastForward = !FastForward;
-                System.Console.WriteLine(FastForward);
+            }
+            if (e.Code == Keyboard.Key.W)
+            {
+                OnlyConsole = !OnlyConsole;
+                window.Clear(Color.Green);
+                window.Display();
             }
         }
         static void Main(string[] args)
@@ -40,7 +46,7 @@ namespace NeuralNetworkTest
 
             Game game1 = new Game();
 
-            int BotAmount = 100;
+            int BotAmount = 1000;
             List<Bot> BotList = new List<Bot>();
             for (int i=0; i<BotAmount; i++)
             {
@@ -55,8 +61,6 @@ namespace NeuralNetworkTest
             
             while(window.IsOpen)
             {
-                window.DispatchEvents();
-                window.Clear();
                 double b = game1.bot1.CalculateOutput();
                 if (b == 1)
                     game1.Right();
@@ -70,6 +74,7 @@ namespace NeuralNetworkTest
                     if (CurrBot==BotAmount)
                     {
                         System.Console.WriteLine("End of generation");
+                        System.Console.WriteLine("Best Score:   {0};", BotList[0].FinalScore);
                         BotList.Sort((b1, b2) => b1.FinalScore.CompareTo(b2.FinalScore));
                         BotList.Reverse();
                         CurrBot = 0;
@@ -84,7 +89,7 @@ namespace NeuralNetworkTest
                         {
                             BotList.RemoveRange(BotAmount / 2, BotList.Count - BotAmount / 2);
                         }
-                        System.Console.WriteLine("{0} Bots lived;", BotList.Count);
+                        System.Console.WriteLine("Bots lived:   {0};", BotList.Count);
                         int tmp1 = 0;
                         while (BotList.Count < BotAmount*9/10)
                         {
@@ -93,14 +98,14 @@ namespace NeuralNetworkTest
                             TempBot1 = BotList[Utility.random.Next(0, BotList.Count-1)].Reproduce(BotList[Utility.random.Next(0, BotList.Count-1)]);
                             BotList.Add(TempBot1);
                         }
-                        System.Console.WriteLine("{0} Bots born;", tmp1);
+                        System.Console.WriteLine("Bots born:    {0}", tmp1);
                         tmp1 = 0;
                         while (BotList.Count < BotAmount)
                         {
                             tmp1++;
                             BotList.Add(new Bot(ref game1.Bricks, ref game1.Ball1, 5));
                         }
-                        System.Console.WriteLine("{0} Bots appeared;\n", tmp1);
+                        System.Console.WriteLine("Bots spawned: {0};\n", tmp1);
                     }
                     game1.Restart();
                     TempBot = new Bot(BotList[CurrBot]);
@@ -117,8 +122,13 @@ namespace NeuralNetworkTest
                     netWindow.Display();
 
                 }
-                window.Draw(game1);
-                window.Display();
+                window.DispatchEvents();
+                if (!OnlyConsole)
+                {
+                    window.Clear();
+                    window.Draw(game1);
+                    window.Display();
+                }
             }
         }
     }
