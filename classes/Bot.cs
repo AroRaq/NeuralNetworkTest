@@ -28,9 +28,8 @@ namespace NeuralNetworkTest
             Bricks = other.Bricks;
             Ball1 = other.Ball1;
             set1 = new double[30, Nodes];
-            set1 = other.set1;
-            set2 = new double[Nodes];
-            set2 = other.set2;
+            set1 = (double[,])other.set1.Clone();
+            set2 = (double[])other.set2.Clone();
             Nodes = other.Nodes;
             //FinalScore = other.FinalScore;
             //BounceCount = other.BounceCount;
@@ -57,7 +56,6 @@ namespace NeuralNetworkTest
         public Bot Reproduce(Bot other)
         {
             Bot Child = new Bot(other);
-            Child = this;
             for (int i = 0; i < 30; i++)
             {
                 for (int j = 0; j < Child.Nodes; j++)

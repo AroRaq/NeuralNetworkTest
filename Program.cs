@@ -85,9 +85,11 @@ namespace NeuralNetworkTest
                                 BotList.RemoveAt(i);
                             }
                         }
+                        if (BotList.Count > BotAmount / 2)
+                            BotList.RemoveRange(BotAmount / 2, BotAmount);
                         System.Console.WriteLine("Bots lived:   {0};", BotList.Count);
                         int tmp1 = 0;
-                        while (BotList.Count < BotAmount/2)
+                        while (BotList.Count < BotAmount * 3 / 4)
                         {
                             tmp1++;
                             BotList.Add(new Bot(ref game1.Bricks, ref game1.Ball1, 5));
@@ -109,22 +111,21 @@ namespace NeuralNetworkTest
                     //TempBot = BotList[CurrBot];
                     game1.UseBot(ref TempBot);
                 }
-
-                ///RYSOWANIE SIECI
-                if (netWindow.IsOpen)
-                {
-                    netWindow.DispatchEvents();
-                    netWindow.Clear();
-                    BotList[CurrBot].DrawNet(ref netWindow);
-                    netWindow.Display();
-
-                }
+                
                 window.DispatchEvents();
                 if (!OnlyConsole)
                 {
                     window.Clear();
                     window.Draw(game1);
                     window.Display();
+                    ///RYSOWANIE SIECI
+                    if (netWindow.IsOpen)
+                    {
+                        netWindow.DispatchEvents();
+                        netWindow.Clear();
+                        BotList[CurrBot].DrawNet(ref netWindow);
+                        netWindow.Display();
+                    }
                 }
             }
         }
