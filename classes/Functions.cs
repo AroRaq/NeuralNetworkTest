@@ -66,5 +66,9 @@ namespace Functions
                 list[n] = value;
             }
         }
+        public static double Magnitude(Vector2f p1, Vector2f p2)
+        {
+            return Math.Sqrt((p2.X - p1.X) * (p2.X - p1.X) + (p2.Y - p1.Y) * (p2.Y - p1.Y));
+        }
     }
 }

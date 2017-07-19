@@ -16,7 +16,7 @@ namespace NeuralNetworkTest
             {
                 for (int x = 0; x < 7; x++)
                 {
-                    Bricks[y, x] = new Brick(80 + x * 160, 40 + y * 80, 160, 80);
+                    Bricks[y, x] = new Brick(160 + x * 160, 80 + y * 80, 160, 80);
                 }
             }
         }
@@ -33,13 +33,13 @@ namespace NeuralNetworkTest
             BricksLeft = 28;
             FinalScore = 0;
             FrameCount = 0;
-            Ball1 = new Ball();
-            Paddle1 = new Paddle();
+            Ball1.Restart();
+            Paddle1.Restart();
             for (int y = 0; y < 4; y++)
             {
                 for (int x = 0; x < 7; x++)
                 {
-                    Bricks[y, x] = new Brick(80 + x * 160, 40 + y * 80, 160, 80);
+                    Bricks[y, x] = new Brick(160 + x * 160, 80 + y * 80, 160, 80);
                 }
             }
         }
@@ -57,6 +57,10 @@ namespace NeuralNetworkTest
             //if (Keyboard.IsKeyPressed(Keyboard.Key.Right) && Paddle1.hitbox.GetGlobalBounds().Left+Paddle1.hitbox.GetGlobalBounds().Width <=1265)
             //    Paddle1.hitbox.Position += new Vector2f(15, 0);
 
+            if (FrameCount > 6000)
+            {
+                GameOver(false);
+            }
             Ball1.Update();
             for (int y = 0; y < 4; y++)
             {
@@ -68,7 +72,7 @@ namespace NeuralNetworkTest
                         if (Bricks[y, x].hitbox.GetGlobalBounds().Intersects(Ball1.hitbox.GetGlobalBounds(), out intersection))
                         {
                             FinalScore++;
-                            if (Bricks[y, x].onHit(Ball1, intersection))
+                            if (Bricks[y, x].OnHit(Ball1, intersection))
                             {
                                 FinalScore += 4;
                                 BricksLeft--;
@@ -105,10 +109,10 @@ namespace NeuralNetworkTest
             return -1;
         }
 
-        public int GameOver()
+        public int GameOver(bool b = true)
         {
             int f = FinalScore - FrameCount / 180;
-            if (bot1.BounceCount == 0)
+            if (bot1.BounceCount == 0 || !b)
                 f = 0;
             Restart();
             return f;

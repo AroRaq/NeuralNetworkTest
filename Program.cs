@@ -51,7 +51,7 @@ namespace NeuralNetworkTest
             for (int i=0; i<BotAmount; i++)
             {
                 BotList.Add(new Bot());
-                BotList[i] = new Bot(ref game1.Bricks, ref game1.Ball1);
+                BotList[i] = new Bot(ref game1.Bricks, ref game1.Ball1, ref game1.Paddle1);
             }
             Bot TempBot = new Bot();
             TempBot = BotList[0];
@@ -92,7 +92,7 @@ namespace NeuralNetworkTest
                         while (BotList.Count < BotAmount * 3 / 4)
                         {
                             tmp1++;
-                            BotList.Add(new Bot(ref game1.Bricks, ref game1.Ball1, 5));
+                            BotList.Add(new Bot(ref game1.Bricks, ref game1.Ball1, ref game1.Paddle1, 5));
                         }
                         System.Console.WriteLine("Bots spawned: {0};", tmp1);
                         tmp1 = 0;

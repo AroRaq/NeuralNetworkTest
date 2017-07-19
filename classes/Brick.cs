@@ -9,12 +9,13 @@ namespace NeuralNetworkTest
         public Brick(int x, int y, int w, int h)
         {
             hitbox = new RectangleShape(new Vector2f(w - 2, h - 2));
+            hitbox.Origin = new Vector2f(w / 2, h / 2);
             hitbox.Position = new Vector2f(x + 1, y + 1);
             hitbox.FillColor = Color.Yellow;
         }
         public RectangleShape hitbox;
         public int health = 5;
-        public bool onHit(Ball b, FloatRect intersection)
+        public bool OnHit(Ball b, FloatRect intersection)
         {
             health--;
             hitbox.FillColor = new Color(255, 255, 0, Convert.ToByte(health * 50));
@@ -34,6 +35,11 @@ namespace NeuralNetworkTest
                 b.hitbox.Position += new Vector2f(intersection.Width * Math.Sign(-b.vel.X), intersection.Height * Math.Sign(b.vel.Y));
             }
             return health == 0;
+        }
+        public Vector2f Position
+        {
+            get { return hitbox.Position; }
+            set { hitbox.Position = value; }
         }
     }
 }

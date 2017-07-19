@@ -27,6 +27,7 @@ namespace NeuralNetworkTest
         {
             Bricks = other.Bricks;
             Ball1 = other.Ball1;
+            Paddle1 = other.Paddle1;
             set1 = new double[30, Nodes];
             set1 = (double[,])other.set1.Clone();
             set2 = (double[])other.set2.Clone();
@@ -34,11 +35,12 @@ namespace NeuralNetworkTest
             //FinalScore = other.FinalScore;
             //BounceCount = other.BounceCount;
         }
-        public Bot(ref Brick[,] _Bricks, ref Ball _Ball1, int _Nodes = 5)
+        public Bot(ref Brick[,] _Bricks, ref Ball _Ball1, ref Paddle _Paddle1, int _Nodes = 5)
         {
             Bricks = _Bricks;
             Nodes = _Nodes;
             Ball1 = _Ball1;
+            Paddle1 = _Paddle1;
             set1 = new double[30, Nodes];
             for (int i = 0; i < 30; i++)
             {
@@ -72,6 +74,7 @@ namespace NeuralNetworkTest
                 Child.Mutate();
             return Child;
         }
+        public Paddle Paddle1;
         public Ball Ball1;
         public Brick[,] Bricks;
         public double[,] set1;
@@ -111,11 +114,11 @@ namespace NeuralNetworkTest
                 {
                     for (int x = 0; x < 7; x++)
                     {
-                        temp[n] += Convert.ToDouble(Bricks[y, x].health) * 0.2d * set1[7 * y + x, n];
+                        temp[n] += Convert.ToDouble(Utility.Magnitude(Bricks[y, x].Position, Paddle1.Position)) * 0.2d * set1[7 * y + x, n];
                     }
                 }
-                temp[n] += set1[28, n] * Convert.ToDouble(Ball1.Position.X - Ball1.Position.X) / 1280f;
-                temp[n] += set1[29, n] * Convert.ToDouble(Ball1.Position.Y - Ball1.Position.Y) / 720f;
+                temp[n] += set1[28, n] * Convert.ToDouble(Ball1.Position.X - Ball1.Position.X) / 1280f * 10;
+                temp[n] += set1[29, n] * Convert.ToDouble(Ball1.Position.Y - Ball1.Position.Y) / 720f * 10;
                 temp[n] /= 30;
             }
             double output = 0;

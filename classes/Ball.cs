@@ -11,9 +11,16 @@ namespace NeuralNetworkTest
             hitbox = new CircleShape(10);
             hitbox.Origin = new Vector2f(10f, 10f);
             hitbox.FillColor = Color.Cyan;
-            hitbox.Position = new Vector2f(640, 600);
-            vel = new Vector2f(0, -5);
+            hitbox.Position = new Vector2f(640, 400);
+            vel = new Vector2f(0, 5);
             Utility.Normalize(ref vel, MaxSpeed);
+        }
+        public void Restart()
+        {
+            Position = new Vector2f(640, 400);
+            vel = new Vector2f(0, 5);
+            Utility.Normalize(ref vel, MaxSpeed);
+
         }
         public float MaxSpeed = 10;
         public CircleShape hitbox;

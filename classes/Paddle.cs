@@ -12,6 +12,15 @@ namespace NeuralNetworkTest
             hitbox.Position = new Vector2f(640, 650);
             hitbox.FillColor = Color.Green;
         }
+        public void Restart()
+        {
+            hitbox.Position = new Vector2f(640, 650);
+        }
+        public Vector2f Position
+        {
+            get { return hitbox.Position; }
+            set { hitbox.Position = value; }
+        }
         public RectangleShape hitbox;
     }
 }
