@@ -9,7 +9,7 @@ using SFML.System;
 
 namespace Functions
 {
-    class Utility
+    static class Utility
     {
         public static Random random = new Random();
         public static double RandomDouble(double min, double max)
@@ -42,6 +42,29 @@ namespace Functions
             if (RandomDouble(0, 1) <= c)
                 return true;
             return false;
+        }
+        public static void ShuffleArray<T>(T[] array)
+        {
+            int n = array.Length;
+            while (n > 1)
+            {
+                int k = random.Next(n--);
+                T temp = array[n];
+                array[n] = array[k];
+                array[k] = temp;
+            }
+        }
+        public static void Shuffle<T>(this IList<T> list)
+        {
+            int n = list.Count;
+            while (n > 1)
+            {
+                n--;
+                int k = random.Next(n + 1);
+                T value = list[k];
+                list[k] = list[n];
+                list[n] = value;
+            }
         }
     }
 }

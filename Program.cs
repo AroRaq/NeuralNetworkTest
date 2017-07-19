@@ -74,9 +74,9 @@ namespace NeuralNetworkTest
                     if (CurrBot==BotAmount)
                     {
                         System.Console.WriteLine("End of generation");
-                        System.Console.WriteLine("Best Score:   {0};", BotList[0].FinalScore);
                         BotList.Sort((b1, b2) => b1.FinalScore.CompareTo(b2.FinalScore));
                         BotList.Reverse();
+                        System.Console.WriteLine("Best Score:   {0};", BotList[0].FinalScore);
                         CurrBot = 0;
                         for (int i=BotList.Count-1; i>=5; i--)
                         {
@@ -99,16 +99,13 @@ namespace NeuralNetworkTest
                         while (BotList.Count < BotAmount)
                         {
                             tmp1++;
-                            Bot TempBot1 = new Bot();
-                            TempBot1 = BotList[Utility.random.Next(0, BotList.Count-1)].Reproduce(BotList[Utility.random.Next(0, BotList.Count-1)]);
-                            BotList.Add(TempBot1);
+                            BotList.Add(new Bot(BotList[Utility.random.Next(0, BotList.Count - 1)].Reproduce(BotList[Utility.random.Next(0, BotList.Count - 1)])));
                         }
                         System.Console.WriteLine("Bots born:    {0}\n", tmp1);
-                        
+                        BotList.Shuffle();
                     }
                     game1.Restart();
                     TempBot = new Bot(BotList[CurrBot]);
-                    //TempBot = BotList[CurrBot];
                     game1.UseBot(ref TempBot);
                 }
                 
