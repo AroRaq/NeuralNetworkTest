@@ -85,27 +85,24 @@ namespace NeuralNetworkTest
                                 BotList.RemoveAt(i);
                             }
                         }
-                        if (BotList.Count>BotAmount/2)
-                        {
-                            BotList.RemoveRange(BotAmount / 2, BotList.Count - BotAmount / 2);
-                        }
                         System.Console.WriteLine("Bots lived:   {0};", BotList.Count);
                         int tmp1 = 0;
-                        while (BotList.Count < BotAmount*9/10)
+                        while (BotList.Count < BotAmount/2)
+                        {
+                            tmp1++;
+                            BotList.Add(new Bot(ref game1.Bricks, ref game1.Ball1, 5));
+                        }
+                        System.Console.WriteLine("Bots spawned: {0};", tmp1);
+                        tmp1 = 0;
+                        while (BotList.Count < BotAmount)
                         {
                             tmp1++;
                             Bot TempBot1 = new Bot();
                             TempBot1 = BotList[Utility.random.Next(0, BotList.Count-1)].Reproduce(BotList[Utility.random.Next(0, BotList.Count-1)]);
                             BotList.Add(TempBot1);
                         }
-                        System.Console.WriteLine("Bots born:    {0}", tmp1);
-                        tmp1 = 0;
-                        while (BotList.Count < BotAmount)
-                        {
-                            tmp1++;
-                            BotList.Add(new Bot(ref game1.Bricks, ref game1.Ball1, 5));
-                        }
-                        System.Console.WriteLine("Bots spawned: {0};\n", tmp1);
+                        System.Console.WriteLine("Bots born:    {0}\n", tmp1);
+                        
                     }
                     game1.Restart();
                     TempBot = new Bot(BotList[CurrBot]);
