@@ -21,6 +21,17 @@ namespace NeuralNetworkTest
             get { return hitbox.Position; }
             set { hitbox.Position = value; }
         }
+        public void Left()
+        {
+            if (hitbox.GetGlobalBounds().Left >= Speed)
+                hitbox.Position -= new Vector2f(Speed, 0);
+        }
+        public void Right()
+        {
+            if (hitbox.GetGlobalBounds().Left + hitbox.GetGlobalBounds().Width <= Properties.WindowSize.X - Speed)
+                hitbox.Position += new Vector2f(Speed, 0);
+        }
         public RectangleShape hitbox;
+        public float Speed = 30;
     }
 }

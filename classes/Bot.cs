@@ -9,8 +9,8 @@ namespace NeuralNetworkTest
     {
         public Bot()
         {
-            set1 = new double[30, Nodes];
-            for (int i = 0; i < 30; i++)
+            set1 = new double[Properties.BrickAmount+2, Nodes];
+            for (int i = 0; i < Properties.BrickAmount+2; i++)
             {
                 for (int j = 0; j < Nodes; j++)
                 {
@@ -28,7 +28,7 @@ namespace NeuralNetworkTest
             Bricks = other.Bricks;
             Ball1 = other.Ball1;
             Paddle1 = other.Paddle1;
-            set1 = new double[30, Nodes];
+            set1 = new double[Properties.BrickAmount+2, Nodes];
             set1 = (double[,])other.set1.Clone();
             set2 = (double[])other.set2.Clone();
             Nodes = other.Nodes;
@@ -41,8 +41,8 @@ namespace NeuralNetworkTest
             Nodes = _Nodes;
             Ball1 = _Ball1;
             Paddle1 = _Paddle1;
-            set1 = new double[30, Nodes];
-            for (int i = 0; i < 30; i++)
+            set1 = new double[Properties.BrickAmount+2, Nodes];
+            for (int i = 0; i < Properties.BrickAmount+2; i++)
             {
                 for (int j = 0; j < Nodes; j++)
                 {
@@ -58,20 +58,33 @@ namespace NeuralNetworkTest
         public Bot Reproduce(Bot other)
         {
             Bot Child = new Bot(other);
-            for (int i = 0; i < 30; i++)
+            for (int i = 0; i < Properties.BrickAmount+2; i++)
             {
-                for (int j = 0; j < Child.Nodes; j++)
+                if (Utility.Chance(0.5))
                 {
-                    Child.set1[i, j] = (set1[i, j] + other.set1[i, j]) / 2;
+                    for (int j = 0; j < Child.Nodes; j++)
+                    {
+                        Child.set1[i, j] = set1[i, j];
+                    }
+                }
+                else
+                {
+                    for (int j = 0; j < Child.Nodes; j++)
+                    {
+                        Child.set1[i, j] = other.set1[i, j];
+                    }
                 }
             }
             Child.set2 = new double[Nodes];
             for (int i = 0; i < Child.Nodes; i++)
             {
-                Child.set2[i] = (set2[i] + other.set2[i]) / 2;
+                if (Utility.Chance(0.5))
+                    Child.set2[i] = set2[i];
+                else
+                    Child.set2[i] = other.set2[i];
             }
             if (Utility.Chance(0.5))
-                Child.Mutate();
+                Child.Mutate(1);
             return Child;
         }
         public Paddle Paddle1;
@@ -87,8 +100,8 @@ namespace NeuralNetworkTest
             FinalScore = 0;
             BounceCount = 0;
             Nodes = nodes;
-            set1 = new double[30, Nodes];
-            for (int i = 0; i < 30; i++)
+            set1 = new double[Properties.BrickAmount, Nodes];
+            for (int i = 0; i < Properties.BrickAmount; i++)
             {
                 for (int j = 0; j < Nodes; j++)
                 {
@@ -103,32 +116,25 @@ namespace NeuralNetworkTest
         }
         public int CalculateOutput()
         {
-            double[] temp = new double[Nodes];
+            double Sum = 0;
+            double Output = 0;
             for (int n = 0; n < Nodes; n++)
             {
-                temp[n] = 0;
-            }
-            for (int n = 0; n < Nodes; n++)
-            {
-                for (int y = 0; y < 4; y++)
+                for (int y = 0; y < Properties.BrickTable.Y; y++)
                 {
-                    for (int x = 0; x < 7; x++)
+                    for (int x = 0; x < Properties.BrickTable.X; x++)
                     {
-                        temp[n] += Convert.ToDouble(Utility.Magnitude(Bricks[y, x].Position, Paddle1.Position)) * 0.2d * set1[7 * y + x, n];
-                    }
+                        Sum += Utility.Magnitude(Bricks[y, x].Position, Paddle1.Position) / 1300d * Bricks[y, x].health * 0.2d * set1[7 * y + x, n];
+                     }
                 }
-                temp[n] += 10d * set1[28, n] * Convert.ToDouble(Ball1.Position.X - Ball1.Position.X) / 1280d;
-                temp[n] += 10d * set1[29, n] * Convert.ToDouble(Ball1.Position.Y - Ball1.Position.Y) / 720d;
-                temp[n] /= 30;
+                Sum += 2*set1[Properties.BrickAmount-2, n] * (Ball1.Position.X - Paddle1.Position.X) / 1280d;
+                Sum += set1[Properties.BrickAmount-1, n] * (Ball1.Position.Y - Paddle1.Position.Y) / 720d;
+                Sum /= Properties.BrickAmount+2;
+                Output += Sum * set2[n];
             }
-            double output = 0;
-            for (int i = 0; i < Nodes; i++)
-            {
-                output += temp[i] * set2[i];
-            }
-            output /= Nodes;
+            Output /= Nodes;
             //System.Console.WriteLine(output);
-            if (output >= 0)
+            if (Output >= 0)
                 return 1;
             else
                 return -1;
@@ -137,54 +143,67 @@ namespace NeuralNetworkTest
         {
             BounceCount = 0;
         }
-        public void Mutate()
+        public void Mutate(double Intensity = 0.1d)
         {
-            for (int i = 0; i < 30; i++)
+            for (int i = 0; i < Properties.BrickAmount; i++)
             {
                 for (int j = 0; j < Nodes; j++)
                 {
-                    if (Utility.Chance(0.1d))
-                        set1[i, j] = (set1[i, j] + Utility.RandomDouble(-1d, 1d)) / 2;
+                    if (Utility.Chance(Intensity))
+                    {
+                        set1[i, j] = (set1[i, j] * 4d + Utility.RandomDouble(-1d, 1d)) * 0.2;
+                    }
                 }
             }
             for (int i = 0; i < Nodes; i++)
             {
-                set2[i] = (set2[i] + Utility.RandomDouble(-1d, 1d)) / 2;
+                if (Utility.Chance(Intensity))
+                {
+                    set2[i] = (set2[i] * 4 + Utility.RandomDouble(-1d, 1d)) * 0.2;
+                }
             }
         }
         public void DrawNet(ref RenderWindow RW)
         {
-            CircleShape[] Circles = new CircleShape[30+Nodes+1];
-            for (int i=0; i<30; i++)
+            CircleShape[] Circles = new CircleShape[Properties.BrickAmount + Nodes + 3];
+            for (int i=0; i< Properties.BrickAmount+2; i++)
             {
                 Circles[i] = new CircleShape(5);
                 //Circles[i].FillColor = Utility.Monochrome((set1[i - i % Nodes, i % Nodes]+1) / 2 * 255);
-                Circles[i].Position = new Vector2f(10, 10+i*30);
+                Circles[i].Position = new Vector2f(10, Properties.NetWindowSize.Y / (Properties.BrickAmount + 2) * (i+1));
                 Circles[i].Origin = new Vector2f(5, 5);
             }
-            for (int i=30; i<30+Nodes; i++)
+            for (int i = Properties.BrickAmount+2; i < Properties.BrickAmount + Nodes+2; i++)
             {
                 Circles[i] = new CircleShape(5);
                 Circles[i].FillColor = Color.White;
-                Circles[i].Position = new Vector2f(210, 15 + (i-30) * 215);
+                Circles[i].Position = new Vector2f(210, Properties.NetWindowSize.Y / (Nodes+1) * (i - Properties.BrickAmount - 1));
                 Circles[i].Origin = new Vector2f(5, 5);
             }
 
-            Circles[30 + Nodes] = new CircleShape(5);
-            Circles[30 + Nodes].FillColor = Color.White;
-            Circles[30 + Nodes].Position = new Vector2f(310, 440);
-            Circles[30 + Nodes].Origin = new Vector2f(5, 5);
+            Circles[Properties.BrickAmount + Nodes + 2] = new CircleShape(5);
+            Circles[Properties.BrickAmount + Nodes + 2].FillColor = Color.White;
+            Circles[Properties.BrickAmount + Nodes + 2].Position = new Vector2f(310, Properties.NetWindowSize.Y/2);
+            Circles[Properties.BrickAmount + Nodes + 2].Origin = new Vector2f(5, 5);
 
-            for (int i=0; i<30; i++)
+            for (int i = 0; i < Properties.BrickAmount+2; i++)
             {
                 for (int n=0; n<Nodes; n++)
                 {
-                    RW.Draw(new Line(Circles[i].Position, Circles[30+n].Position, Utility.WhiteAlpha((set1[i - i % Nodes, i % Nodes] + 1) / 2 * 255)));
+                    try
+                    {
+                        RW.Draw(new Line(Circles[i].Position, Circles[Properties.BrickAmount + n + 2].Position, Utility.Monochrome((set1[i - i % Nodes, i % Nodes] + 1) / 2 * 255)));
+                    }
+                    catch (System.OverflowException)
+                    {
+                        System.Console.WriteLine(set1[i - i % Nodes, i % Nodes]);
+                    }
+
                 }
             }
             for (int n = 0; n < Nodes; n++)
             {
-                RW.Draw(new Line(Circles[30+n].Position, Circles[30+Nodes].Position, Utility.WhiteAlpha((set2[n] + 1) / 2 * 255)));
+                RW.Draw(new Line(Circles[Properties.BrickAmount + 2 + n].Position, Circles[Properties.BrickAmount  + 2 + Nodes].Position, Utility.Monochrome((set2[n] + 1) / 2 * 255)));
             }
             for (int i=0; i<Circles.Length; i++)
             {

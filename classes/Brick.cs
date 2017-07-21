@@ -36,6 +36,11 @@ namespace NeuralNetworkTest
             }
             return health == 0;
         }
+        public void Heal()
+        {
+            health = 5;
+            hitbox.FillColor = Color.Yellow;
+        }
         public Vector2f Position
         {
             get { return hitbox.Position; }

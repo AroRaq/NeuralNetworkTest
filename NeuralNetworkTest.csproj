@@ -62,6 +62,7 @@
     <Compile Include="classes\Line.cs" />
     <Compile Include="classes\Paddle.cs" />
     <Compile Include="Program.cs" />
+    <Compile Include="Properties.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
