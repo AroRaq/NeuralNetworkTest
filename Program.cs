@@ -82,7 +82,7 @@ namespace NeuralNetworkTest
                             BotList[0].FinalScore, 
                             BotList.FindLastIndex( delegate (Bot b1) { return b1.FinalScore == BotList[0].FinalScore; }) + 1
                         );
-                        for (int i=0; i<Properties.NetWindowSize.X; i++)
+                        for (int i=0; i<Math.Min(Properties.NetWindowSize.X, Properties.BotAmount); i++)
                         {
                             Evolution.Append(new Vertex(new Vector2f(i, Generation), Utility.Spectral_color(BotList[i].FinalScore + 400)));
                         }
@@ -102,11 +102,11 @@ namespace NeuralNetworkTest
                         for (int i=0; i<Properties.BotAmount / 10 - BestAmount; i++)
                         {
                             Bot t = new Bot(BotList[0]);
-                            t.Mutate(0.01);
+                            t.Mutate(0.1d);
                             BotList.Add(t);
                         }
                         int tmp1 = 0;
-                        while (BotList.Count < Properties.BotAmount * 3 / 4)
+                        while (BotList.Count < Properties.BotAmount * 9 / 10)
                         {
                             tmp1++;
                             BotList.Add(new Bot(BotList[Utility.random.Next(0, BotList.Count - 1)].Reproduce(BotList[Utility.random.Next(0, BotList.Count - 1)])));
@@ -119,7 +119,10 @@ namespace NeuralNetworkTest
                             BotList.Add(new Bot(ref game1.Bricks, ref game1.Ball1, ref game1.Paddle1, Properties.Nodes));
                         }
                         System.Console.WriteLine("Bots spawned: {0};\n", tmp1);
-                        
+                        for (int i=0; i<BotList.Count; i++)
+                        {
+                            BotList[i].Mutate(0.001);
+                        }
                         BotList.Shuffle();
                     }
                     game1.Restart();
